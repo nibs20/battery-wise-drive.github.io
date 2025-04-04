@@ -8,8 +8,13 @@ import ChatBot from '@/components/ChatBot';
 import MindfulNotification from '@/components/MindfulNotification';
 import { Button } from '@/components/ui/button';
 import { BatteryCharging } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
   // Mock data for the app
   const userData = {
     drivingScore: 7,
@@ -31,9 +36,19 @@ const Index = () => {
                 to extend your battery's lifespan and efficiency.
               </p>
               <div className="flex gap-4">
-                <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
-                  Start Monitoring
-                </Button>
+                {isAuthenticated ? (
+                  <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+                    Start Monitoring
+                  </Button>
+                ) : (
+                  <Button 
+                    size="lg" 
+                    className="bg-white text-blue-600 hover:bg-gray-100"
+                    onClick={() => navigate('/signup')}
+                  >
+                    Sign Up Now
+                  </Button>
+                )}
                 <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
                   Learn More
                 </Button>
@@ -51,8 +66,25 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Main dashboard */}
-      <BatteryDashboard />
+      {/* Main dashboard - only show for authenticated users */}
+      {isAuthenticated ? (
+        <BatteryDashboard />
+      ) : (
+        <section className="py-16">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-2xl font-bold mb-4">Access Your Dashboard</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto mb-8">
+              Sign in to access your personalized battery dashboard with real-time monitoring and insights.
+            </p>
+            <Button 
+              onClick={() => navigate('/login')} 
+              className="bg-battery-blue text-white"
+            >
+              Sign In Now
+            </Button>
+          </div>
+        </section>
+      )}
       
       {/* Tips Section */}
       <section className="py-12 bg-gray-100" id="tips">
