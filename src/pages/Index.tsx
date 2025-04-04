@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import BatteryDashboard from '@/components/BatteryDashboard';
 import DrivingTips from '@/components/DrivingTips';
 import FactorsSection from '@/components/FactorsSection';
+import ChatBot from '@/components/ChatBot';
 import { Button } from '@/components/ui/button';
 import { BatteryCharging } from 'lucide-react';
 
@@ -85,6 +86,9 @@ const Index = () => {
           </div>
         </div>
       </footer>
+      
+      {/* ChatBot */}
+      <ChatBot />
     </div>
   );
 };
