@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Calendar, AlertTriangle, Clock } from 'lucide-react';
+import { Calendar, AlertTriangle, Clock, Calculator } from 'lucide-react';
 import { predictBatteryHealth } from '@/utils/batteryPrediction';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { HoverCard, HoverCardTrigger, HoverCardContent } from '@/components/ui/hover-card';
@@ -13,6 +13,12 @@ interface BatteryPredictionProps {
 
 const BatteryPrediction = ({ efficiency, drivingScore }: BatteryPredictionProps) => {
   const prediction = predictBatteryHealth(efficiency, drivingScore);
+  
+  // Detailed calculation example
+  const baseLifespan = 36; // 3 years base lifespan
+  const efficiencyFactor = (efficiency / 100) * 12;
+  const scoreFactor = (drivingScore / 10) * 12;
+  const totalLifespan = baseLifespan + efficiencyFactor + scoreFactor;
   
   // Determine color based on health status
   const getStatusColor = () => {
@@ -69,21 +75,55 @@ const BatteryPrediction = ({ efficiency, drivingScore }: BatteryPredictionProps)
       <div className="flex justify-center mt-2">
         <HoverCard>
           <HoverCardTrigger asChild>
-            <Button variant="outline" size="sm" className="text-xs">
+            <Button variant="outline" size="sm" className="text-xs flex items-center gap-1">
+              <Calculator className="h-3 w-3" />
               How is this calculated?
             </Button>
           </HoverCardTrigger>
-          <HoverCardContent className="w-80 text-sm">
-            <p className="mb-2">Your battery prediction is calculated based on:</p>
-            <ul className="list-disc list-inside space-y-1 text-xs">
-              <li>Current battery efficiency ({efficiency}%)</li>
-              <li>Your driving habits score ({drivingScore}/10)</li>
-              <li>Industry average battery degradation rates</li>
-              <li>Typical electric vehicle battery lifespan patterns</li>
-            </ul>
-            <p className="mt-2 text-xs text-gray-600">
-              Improve your driving habits to extend your battery's lifespan.
-            </p>
+          <HoverCardContent className="w-80 p-4">
+            <h4 className="font-semibold text-sm mb-2">Your Battery Prediction Calculation</h4>
+            
+            <div className="bg-gray-50 p-3 rounded-md mb-3 text-sm">
+              <p className="font-medium text-xs text-gray-500 mb-1">Input Values:</p>
+              <div className="grid grid-cols-2 gap-1">
+                <span>Battery Efficiency:</span><span className="font-medium">{efficiency}%</span>
+                <span>Driving Score:</span><span className="font-medium">{drivingScore}/10</span>
+              </div>
+            </div>
+            
+            <div className="space-y-2 text-sm">
+              <p className="font-medium text-xs text-gray-500">Calculation Steps:</p>
+              
+              <div className="grid grid-cols-3 gap-1 text-xs border-b pb-1">
+                <span>Base Lifespan:</span>
+                <span className="col-span-2 font-mono">{baseLifespan} months</span>
+              </div>
+              
+              <div className="grid grid-cols-3 gap-1 text-xs border-b pb-1">
+                <span>Efficiency Bonus:</span>
+                <span className="col-span-2 font-mono">
+                  ({efficiency}% ÷ 100) × 12 = {efficiencyFactor.toFixed(1)} months
+                </span>
+              </div>
+              
+              <div className="grid grid-cols-3 gap-1 text-xs border-b pb-1">
+                <span>Driving Bonus:</span>
+                <span className="col-span-2 font-mono">
+                  ({drivingScore}/10) × 12 = {scoreFactor.toFixed(1)} months
+                </span>
+              </div>
+              
+              <div className="grid grid-cols-3 gap-1 text-xs font-medium">
+                <span>Total Lifespan:</span>
+                <span className="col-span-2 font-mono">
+                  {baseLifespan} + {efficiencyFactor.toFixed(1)} + {scoreFactor.toFixed(1)} = {totalLifespan.toFixed(1)} months
+                </span>
+              </div>
+              
+              <div className="mt-3 pt-2 border-t text-xs text-gray-600">
+                <p>The final value is rounded to {prediction.estimatedLifespan} months. Your replacement date is calculated by adding this to today's date.</p>
+              </div>
+            </div>
           </HoverCardContent>
         </HoverCard>
       </div>

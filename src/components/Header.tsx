@@ -57,7 +57,7 @@ const Header = () => {
                 </Button>
               </Link>
               <Link to="/signup">
-                <Button variant="primary" size="sm" className="bg-battery-blue text-white">
+                <Button variant="secondary" size="sm" className="bg-battery-blue text-white">
                   Sign Up
                 </Button>
               </Link>

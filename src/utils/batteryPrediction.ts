@@ -8,6 +8,12 @@ type BatteryPrediction = {
 
 /**
  * Calculates battery health prediction based on current efficiency and driving score
+ * 
+ * Example calculation:
+ * - Base lifespan: 36 months (3 years)
+ * - If efficiency is 75%, efficiency factor = (75/100) × 12 = 9 months
+ * - If driving score is 8/10, score factor = (8/10) × 12 = 9.6 months
+ * - Total lifespan = 36 + 9 + 9.6 = 54.6 months (rounded to 55 months)
  */
 export const predictBatteryHealth = (
   efficiency: number,
