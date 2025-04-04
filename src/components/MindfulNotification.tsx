@@ -109,7 +109,11 @@ const MindfulNotification = ({
           title: "Driving Habit Alert",
           description: "Your driving patterns are affecting battery health. Try smoother acceleration.",
           duration: 6000,
-          icon: categoryIcons.warning
+          action: (
+            <div className="flex items-center">
+              {categoryIcons.warning}
+            </div>
+          )
         });
         setLastToastTime(Date.now());
       } else if (drivingScore > 8) {
@@ -117,7 +121,11 @@ const MindfulNotification = ({
           title: "Excellent Driving Habits",
           description: "Your eco-friendly driving is helping extend your battery's lifespan!",
           duration: 5000,
-          icon: categoryIcons.success
+          action: (
+            <div className="flex items-center">
+              {categoryIcons.success}
+            </div>
+          )
         });
         setLastToastTime(Date.now());
       }
@@ -139,7 +147,11 @@ const MindfulNotification = ({
         title,
         description: tip,
         duration: 5000,
-        icon: categoryIcons[category as keyof typeof categoryIcons]
+        action: (
+          <div className="flex items-center">
+            {categoryIcons[category as keyof typeof categoryIcons]}
+          </div>
+        )
       });
       
       setLastToastTime(now);

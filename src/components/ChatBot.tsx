@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, HelpCircle, MailQuestion, PhoneCall } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerClose } from '@/components/ui/drawer';
-import { useMediaQuery } from '@/hooks/use-mobile'; 
+import { useIsMobile } from '@/hooks/use-mobile'; 
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 
@@ -21,7 +20,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ className }) => {
     { text: "Hello! How can I help you with your battery today?", isUser: false }
   ]);
   const [inputValue, setInputValue] = useState('');
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = !useIsMobile();
 
   const handleOptionClick = (option: SupportOption) => {
     setActiveOption(option);

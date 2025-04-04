@@ -5,6 +5,7 @@ import BatteryDashboard from '@/components/BatteryDashboard';
 import DrivingTips from '@/components/DrivingTips';
 import FactorsSection from '@/components/FactorsSection';
 import ChatBot from '@/components/ChatBot';
+import MindfulNotification from '@/components/MindfulNotification';
 import { Button } from '@/components/ui/button';
 import { BatteryCharging } from 'lucide-react';
 
@@ -86,6 +87,13 @@ const Index = () => {
           </div>
         </div>
       </footer>
+      
+      {/* Mindful Notification System */}
+      <MindfulNotification 
+        drivingScore={userData.drivingScore} 
+        efficiency={userData.batteryEfficiency}
+        frequencyInMinutes={3}
+      />
       
       {/* ChatBot */}
       <ChatBot />
