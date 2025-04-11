@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import BatteryDashboard from '@/components/BatteryDashboard';
 import DrivingTips from '@/components/DrivingTips';
 import FactorsSection from '@/components/FactorsSection';
+import FAQSection from '@/components/FAQSection';
 import ChatBot from '@/components/ChatBot';
 import MindfulNotification from '@/components/MindfulNotification';
 import { Button } from '@/components/ui/button';
@@ -104,6 +105,9 @@ const Index = () => {
 
       {/* Educational content about battery factors */}
       <FactorsSection />
+      
+      {/* FAQ Section */}
+      <FAQSection />
       
       {/* Footer */}
       <footer className="bg-battery-dark text-white py-8">
