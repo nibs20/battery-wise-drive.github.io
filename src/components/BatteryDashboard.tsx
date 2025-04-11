@@ -25,12 +25,12 @@ const dashboardData = {
   batteryEfficiency: 78,
   lastUpdated: new Date().toLocaleString(),
   user: {
-    name: 'Alex Johnson',
-    vehicleModel: 'Tesla Model 3',
-    batteryCapacity: 75,
+    name: 'Kavi Sharma',
+    vehicleModel: 'Tata Nexon EV',
+    batteryCapacity: 40,
     averageChargingTime: '2.5 hours',
-    drivingDistance: '32 miles/day',
-    preferredTemperature: '65-75°F',
+    drivingDistance: '32 km/day',
+    preferredTemperature: '18-24°C',
     chargingCycles: 127
   }
 };

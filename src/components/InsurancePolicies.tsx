@@ -51,9 +51,9 @@ const getBestValueInsurer = (insuranceCompanies: InsuranceCompany[], drivingScor
 
 const insuranceCompanies: InsuranceCompany[] = [
   {
-    name: 'EcoDrive Insurance',
+    name: 'Bajaj Allianz EV Insurance',
     logo: <Shield className="h-6 w-6 text-green-600" />,
-    baseRate: 120,
+    baseRate: 8500,
     discountFactor: 0.40, // Up to 40% discount for perfect drivers
     coverageDescription: 'Comprehensive coverage specialized for electric vehicles with battery replacement guarantee.',
     specialFeatures: ['Battery replacement coverage', 'Roadside charging assistance', 'Green driver rewards'],
@@ -61,9 +61,9 @@ const insuranceCompanies: InsuranceCompany[] = [
     color: 'bg-green-100 border-green-200'
   },
   {
-    name: 'PowerShield',
+    name: 'HDFC ERGO EV Shield',
     logo: <Shield className="h-6 w-6 text-blue-600" />,
-    baseRate: 105,
+    baseRate: 7500,
     discountFactor: 0.30, // Up to 30% discount
     coverageDescription: 'Balanced coverage with strong focus on battery protection and technical assistance.',
     specialFeatures: ['24/7 technical support', 'Home charger coverage', 'Loaner vehicle program'],
@@ -71,19 +71,19 @@ const insuranceCompanies: InsuranceCompany[] = [
     color: 'bg-blue-100 border-blue-200'
   },
   {
-    name: 'ValueCharge',
+    name: 'ICICI Lombard EV Assure',
     logo: <Shield className="h-6 w-6 text-purple-600" />,
-    baseRate: 95,
+    baseRate: 6500,
     discountFactor: 0.25, // Up to 25% discount
     coverageDescription: 'Budget-friendly insurance with essential coverage for electric vehicles.',
-    specialFeatures: ['Pay-per-mile option', 'Basic battery coverage', 'Affordable premiums'],
+    specialFeatures: ['Pay-per-km option', 'Basic battery coverage', 'Affordable premiums'],
     recommendedFor: 'Budget-conscious drivers looking for essential coverage',
     color: 'bg-purple-100 border-purple-200'
   },
   {
-    name: 'EliteDrive Prestige',
+    name: 'Tata AIG Premium EV Care',
     logo: <Shield className="h-6 w-6 text-amber-600" />,
-    baseRate: 150,
+    baseRate: 10500,
     discountFactor: 0.35, // Up to 35% discount
     coverageDescription: 'Premium coverage with concierge service and extensive benefits for luxury electric vehicles.',
     specialFeatures: ['Concierge service', 'Premium charging network access', 'Guaranteed replacement value'],
@@ -91,9 +91,9 @@ const insuranceCompanies: InsuranceCompany[] = [
     color: 'bg-amber-100 border-amber-200'
   },
   {
-    name: 'SafeCharge Insurance',
+    name: 'SBI General EV Surakshaon',
     logo: <Shield className="h-6 w-6 text-red-600" />,
-    baseRate: 110,
+    baseRate: 7900,
     discountFactor: 0.28, // Up to 28% discount
     coverageDescription: 'Safety-focused insurance with accident prevention benefits and recovery services.',
     specialFeatures: ['Accident prevention rewards', 'Family protection plan', 'Safety equipment discounts'],
@@ -186,7 +186,7 @@ const InsurancePolicies: React.FC<InsurancePoliciesProps> = ({ drivingScore }) =
                   <div className="flex flex-col items-center justify-center gap-2 min-w-[120px]">
                     <div className="text-center">
                       <div className="text-xs text-gray-500">Monthly premium</div>
-                      <div className="text-2xl font-bold">${monthlyRate}</div>
+                      <div className="text-2xl font-bold">₹{monthlyRate}</div>
                       <div className="text-xs text-green-600">
                         Save up to {Math.round(company.discountFactor * 100)}% with good driving
                       </div>
