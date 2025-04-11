@@ -39,7 +39,7 @@ const Index = () => {
               <div className="flex gap-4">
                 {isAuthenticated ? (
                   <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
-                    Start Monitoring
+                    View Dashboard
                   </Button>
                 ) : (
                   <Button 

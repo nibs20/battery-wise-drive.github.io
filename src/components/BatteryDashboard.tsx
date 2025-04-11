@@ -6,21 +6,38 @@ import BatteryEfficiency from './BatteryEfficiency';
 import DrivingTips from './DrivingTips';
 import BatteryPrediction from './BatteryPrediction';
 import MindfulNotification from './MindfulNotification';
+import UsageGraph from './UsageGraph';
+import UserDetails from './UserDetails';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
-import { BellRing, Clock } from 'lucide-react';
+import { BellRing, Clock, ChevronDown } from 'lucide-react';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 // Mock data for the dashboard
 const dashboardData = {
   drivingScore: 7,
   batteryEfficiency: 78,
-  lastUpdated: new Date().toLocaleString()
+  lastUpdated: new Date().toLocaleString(),
+  user: {
+    name: 'Alex Johnson',
+    vehicleModel: 'Tesla Model 3',
+    batteryCapacity: 75,
+    averageChargingTime: '2.5 hours',
+    drivingDistance: '32 miles/day',
+    preferredTemperature: '65-75°F',
+    chargingCycles: 127
+  }
 };
 
 const BatteryDashboard = () => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [notificationFrequency, setNotificationFrequency] = useState(2); // minutes
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   
   return (
     <section className="py-8">
@@ -70,35 +87,57 @@ const BatteryDashboard = () => {
           />
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <InfoCard title="Driving Score" hoverable>
-            <DrivingScore score={dashboardData.drivingScore} />
-          </InfoCard>
-          
-          <InfoCard title="Battery Status" hoverable>
-            <BatteryEfficiency efficiency={dashboardData.batteryEfficiency} />
-          </InfoCard>
-
-          <InfoCard 
-            title="Battery Prediction" 
-            variant={dashboardData.batteryEfficiency < 50 ? "warning" : "default"}
-            hoverable
-          >
-            <BatteryPrediction
-              efficiency={dashboardData.batteryEfficiency}
-              drivingScore={dashboardData.drivingScore}
-            />
-          </InfoCard>
-
-          <div className="lg:col-span-3 md:col-span-2 col-span-1">
-            <InfoCard 
-              title="Recommendations" 
-              className="h-full"
-              variant={dashboardData.drivingScore < 5 ? "warning" : "highlighted"}
-            >
-              <DrivingTips drivingScore={dashboardData.drivingScore} />
-            </InfoCard>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div className="md:col-span-2">
+            <UsageGraph />
           </div>
+          
+          <div>
+            <UserDetails userData={dashboardData.user} />
+          </div>
+        </div>
+        
+        <Collapsible
+          open={isDetailsOpen}
+          onOpenChange={setIsDetailsOpen}
+          className="mb-6"
+        >
+          <CollapsibleTrigger className="flex items-center justify-center w-full gap-2 text-sm font-medium text-battery-blue py-2 hover:bg-gray-50 rounded-md transition-colors">
+            {isDetailsOpen ? 'Hide' : 'Show'} Detailed Metrics
+            <ChevronDown className={`h-4 w-4 transition-transform ${isDetailsOpen ? 'rotate-180' : ''}`} />
+          </CollapsibleTrigger>
+          <CollapsibleContent className="mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <InfoCard title="Driving Score" hoverable>
+                <DrivingScore score={dashboardData.drivingScore} />
+              </InfoCard>
+              
+              <InfoCard title="Battery Status" hoverable>
+                <BatteryEfficiency efficiency={dashboardData.batteryEfficiency} />
+              </InfoCard>
+
+              <InfoCard 
+                title="Battery Prediction" 
+                variant={dashboardData.batteryEfficiency < 50 ? "warning" : "default"}
+                hoverable
+              >
+                <BatteryPrediction
+                  efficiency={dashboardData.batteryEfficiency}
+                  drivingScore={dashboardData.drivingScore}
+                />
+              </InfoCard>
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
+
+        <div className="lg:col-span-3 md:col-span-2 col-span-1">
+          <InfoCard 
+            title="Recommendations" 
+            className="h-full"
+            variant={dashboardData.drivingScore < 5 ? "warning" : "highlighted"}
+          >
+            <DrivingTips drivingScore={dashboardData.drivingScore} />
+          </InfoCard>
         </div>
       </div>
     </section>
