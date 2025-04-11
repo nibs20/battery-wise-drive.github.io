@@ -8,6 +8,7 @@ import BatteryPrediction from './BatteryPrediction';
 import MindfulNotification from './MindfulNotification';
 import UsageGraph from './UsageGraph';
 import UserDetails from './UserDetails';
+import InsurancePolicies from './InsurancePolicies';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
@@ -38,6 +39,7 @@ const BatteryDashboard = () => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [notificationFrequency, setNotificationFrequency] = useState(2); // minutes
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [showInsurance, setShowInsurance] = useState(false);
   
   return (
     <section className="py-8">
@@ -130,14 +132,20 @@ const BatteryDashboard = () => {
           </CollapsibleContent>
         </Collapsible>
 
-        <div className="lg:col-span-3 md:col-span-2 col-span-1">
-          <InfoCard 
-            title="Recommendations" 
-            className="h-full"
-            variant={dashboardData.drivingScore < 5 ? "warning" : "highlighted"}
-          >
-            <DrivingTips drivingScore={dashboardData.drivingScore} />
-          </InfoCard>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div>
+            <InfoCard 
+              title="Recommendations" 
+              className="h-full"
+              variant={dashboardData.drivingScore < 5 ? "warning" : "highlighted"}
+            >
+              <DrivingTips drivingScore={dashboardData.drivingScore} />
+            </InfoCard>
+          </div>
+          
+          <div>
+            <InsurancePolicies drivingScore={dashboardData.drivingScore} />
+          </div>
         </div>
       </div>
     </section>
